@@ -5,7 +5,7 @@ from re import search,sub,IGNORECASE
 from requests import get
 from subprocess import Popen
 from sys import argv,exit
-import pickle
+
 ### PARAMETERS ###
 # if the initial request to obtain the hosts list fails, then retry this many times.
 max_retries = 10
@@ -142,10 +142,6 @@ def main():
 	contents = user_defined_domains()
 	# iterate through each list and add its contents to the $contents list.
 	for source in sources: contents = download(source, sources[source], contents)
-	#=== TEST ONLY ===#
-	#with open("contents.pkl", "wb") as f: contents = pickle.dump(contents, f)
-	#with open("contents.pkl", "rb") as f: contents = pickle.load(f)
-	#=== END TEST ===#
 	# obtain one list full of addresses from all sources.
 	contents = process(contents)
 	# write the addresses to the output file.
